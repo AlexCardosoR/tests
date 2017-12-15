@@ -15,19 +15,20 @@ private $actionUser=array('connexion');
         $dVueErreur = array();
 
         try {
-            $action = $_REQUEST['action'];
-            if (in_array($action,$this->actionAdmin)) {
-                new AdminControleur();
+                if(!isset($_REQUEST['action'])){
+                    new Controleur();
+                }
+                $action = $_REQUEST['action'];
+                if (in_array($action, $this->actionAdmin)) {
+                    new AdminControleur();
 
-            } else if (in_array($action, $this->actionUser) || $action == NULL){
-                new Controleur();
-            }
+                } else if (in_array($action, $this->actionUser)) {
+                    new Controleur();
+                } else {
+                    $dVueErreur[] = "Action inconnue";
+                    require($rep . $vues['erreur']);
 
-            else {
-                $dVueErreur[] = "Action inconnue";
-                require($rep . $vues['erreur']);
-
-            }
+                }
 
         }catch (PDOException $e) {
 

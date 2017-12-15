@@ -8,27 +8,32 @@ class Controleur
         global $rep, $vues;
 
 
+
         $dvueErreur = array();
 
+
+
         try {
-            $action = $_REQUEST['action'];
 
-            switch ($action) {
+            if(!isset($_REQUEST['action'])){
+                $this->getNews();
+            }
 
-                case NULL:
+            if(!empty($_REQUEST['action'])) {
+                $action = $_REQUEST['action'];
 
-                    $this->getNews();
-                    break;
+                switch ($action) {
 
-                case 'connexion':
+                    case 'connexion':
 
-                    $this->connexion();
-                    break;
+                        $this->connexion();
+                        break;
 
-                default:
-                    echo 'afaire erreur';
-                    break;
+                    default:
+                        echo 'afaire erreur';
+                        break;
 
+                }
             }
         } catch (PDOException $e) {
             echo $e->getmessage();
