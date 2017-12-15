@@ -1,0 +1,84 @@
+<?php
+
+
+class Controleur
+{
+    function __construct()
+    {
+        global $rep, $vues;
+
+
+        $dvueErreur = array();
+
+        try {
+            $action = $_REQUEST['action'];
+
+            switch ($action) {
+
+                case NULL:
+
+                    $this->getNews();
+                    break;
+
+                case 'connexion':
+
+                    $this->connexion();
+                    break;
+
+                default:
+                    echo 'afaire erreur';
+                    break;
+
+            }
+        } catch (PDOException $e) {
+            echo $e->getmessage();
+            $dVueEreur[] = "Erreur PDO inattendue!!! ";
+            require($rep . $vues['erreur']);
+        }
+        catch (Exception $e2) {
+            echo $e2->getmessage();
+            $dVueEreur[] = "Erreur inattendue!!! ";
+            require($rep . $vues['erreur']);
+        }
+        exit(0);
+    }
+
+    function Reinit()
+    {
+        global $rep, $vues;
+        require($rep . $vues['Pagedacceuil']);
+
+    }
+
+
+    function getNews()
+    {
+        global $rep, $vues;
+
+        $modele = new ModeleUtilisateur();
+
+        $data = $modele->getNews();
+
+        require ($rep.$vues['vuehome']);
+    }
+
+    private function connexion()
+    {
+
+        global $rep,$vues;
+
+
+        $modele = new ModeleUtilisateur();
+
+        $connexion = $modele->connexion();
+
+        if ($connexion) {
+            require($rep.$vues['vueAdmin']);
+
+        }
+        else echo 'afaire';
+
+    }
+}
+
+
