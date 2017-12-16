@@ -44,7 +44,6 @@ class AdminControleur
             $dVueEreur[] = "Erreur inattendue!!! ";
             require($rep . $vues['erreur']);
         }
-        exit(0);
     }
 
     function Reinit()

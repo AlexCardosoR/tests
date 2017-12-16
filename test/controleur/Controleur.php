@@ -45,7 +45,6 @@ class Controleur
             $dVueEreur[] = "Erreur inattendue!!! ";
             require($rep . $vues['erreur']);
         }
-        exit(0);
     }
 
     function Reinit()
@@ -71,11 +70,10 @@ class Controleur
     {
 
         global $rep,$vues;
-
-
+        //vérif ici les $_POST
         $modele = new ModeleUtilisateur();
 
-        $connexion = $modele->connexion();
+        $connexion = $modele->connexion();//les envoyer en param
 
         if ($connexion) {
             require($rep.$vues['vueAdmin']);

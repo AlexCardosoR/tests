@@ -13,7 +13,7 @@ class ModeleUtilisateur
     function connexion()
     {
         $this->book= new BookGatewayAdmin();
-        $username = $_POST['name'];
+        $username = $_POST['login'];
         $passwd = $_POST['passwd'];
 
         return $this->book->getPass($username,$passwd);

@@ -23,7 +23,7 @@ private $actionUser=array('connexion');
                     new AdminControleur();
 
                 } else if (in_array($action, $this->actionUser)) {
-                    new Controleur();
+                        new Controleur();
                 } else {
                     $dVueErreur[] = "Action inconnue";
                     require($rep . $vues['erreur']);
@@ -36,7 +36,6 @@ private $actionUser=array('connexion');
             require($rep . $vues['erreur']);
 
         }
-        exit(0);
     }
 
 
