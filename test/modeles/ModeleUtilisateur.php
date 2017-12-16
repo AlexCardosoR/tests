@@ -2,28 +2,20 @@
 
 class ModeleUtilisateur
 {
-    private $book;
+    private $news;
 
-    public function __construct()
+    function connexion($username,$passwd)
     {
+        $this->news= new NewsGatewayAdmin(new Connection());
 
-
-    }
-
-    function connexion()
-    {
-        $this->book= new BookGatewayAdmin();
-        $username = $_POST['login'];
-        $passwd = $_POST['passwd'];
-
-        return $this->book->getPass($username,$passwd);
+        return $this->news->getPass($username,$passwd);
     }
 
 
-    function getNews() {
+    function getNews($nbrAffichage) {
 
-        $g=new BookGateway(new Connection());
-        $data=$g->getNews();
+        $g=new NewsGateway(new Connection());
+        $data=$g->getNews($nbrAffichage);
         return $data;
     }
 

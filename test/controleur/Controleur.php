@@ -3,15 +3,10 @@
 
 class Controleur
 {
+
     function __construct()
     {
-        global $rep, $vues;
-
-
-
-        $dvueErreur = array();
-
-
+        global $rep, $vues,$Tmessage;
 
         try {
 
@@ -29,6 +24,11 @@ class Controleur
                         $this->connexion();
                         break;
 
+                    case 'getNews':
+
+                        $this->getNews();
+                        break;
+
                     default:
                         echo 'afaire erreur';
                         break;
@@ -37,12 +37,12 @@ class Controleur
             }
         } catch (PDOException $e) {
             echo $e->getmessage();
-            $dVueEreur[] = "Erreur PDO inattendue!!! ";
+            $Tmessage[] = "Erreur PDO inattendue!!! ";
             require($rep . $vues['erreur']);
         }
         catch (Exception $e2) {
             echo $e2->getmessage();
-            $dVueEreur[] = "Erreur inattendue!!! ";
+            $Tmessager[] = "Erreur inattendue!!! ";
             require($rep . $vues['erreur']);
         }
     }
@@ -59,9 +59,25 @@ class Controleur
     {
         global $rep, $vues;
 
+
+        if (isset($_POST['nbrAffichage'])) {
+
+            $nbrAffichage=$_POST['nbrAffichage'];
+
+            if (!$nbrAffichage = Validation::validString($nbrAffichage)) {
+                $Tmessage[] = 'Erreur : Nombre à afficher non valide';
+            }
+        }
+        else{
+            $nbrAffichage=15;
+        }
+
         $modele = new ModeleUtilisateur();
 
-        $data = $modele->getNews();
+        $nbrAffichage= (int) $nbrAffichage;
+
+        $data = $modele->getNews($nbrAffichage);
+
 
         require ($rep.$vues['vuehome']);
     }
@@ -69,18 +85,34 @@ class Controleur
     private function connexion()
     {
 
-        global $rep,$vues;
-        //vérif ici les $_POST
-        $modele = new ModeleUtilisateur();
+        global $rep,$vues,$Tmessage;
+        $username = $_POST['login'];
+        $passwd = $_POST['passwd'];
 
-        $connexion = $modele->connexion();//les envoyer en param
+        if(count($_POST)>0){
 
-        if ($connexion) {
-            require($rep.$vues['vueAdmin']);
+            if (!$url=Validation::validString($username)) {
+                $Tmessage[] = 'Erreur : Url Non valide';
+            }
 
+            if (!$name=Validation::validString($passwd)) {
+                $Tmessage[] = 'Erreur : Name Non valide';
+            }
+
+            $modele = new ModeleUtilisateur();
+
+            $connexion = $modele->connexion($username,$passwd);
+            $_SESSION['role']='admin';
+            $_SESSION['login']=$username;
+
+            if ($connexion) {
+                require($rep.$vues['vueAdmin']);
+            }
+            else{
+                $Tmessage[] = "login ou password invalide";
+                require($rep . $vues['erreur']);
+            }
         }
-        else echo 'afaire';
-
     }
 }
 
