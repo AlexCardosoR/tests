@@ -4,7 +4,7 @@
 class Frontcontroleur
 {
     private $actionAdmin= array('deconnexion','addNews','deleteNews','getNewsAdmin');
-    private $actionUser=array('connexion','getNews','precedent','suivant');
+    private $actionUser=array('connexion','getNews');
 
     function __construct()
     {

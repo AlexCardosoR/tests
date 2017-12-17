@@ -54,24 +54,9 @@ class AdminControleur
     function getNewsAdmin(){
         global $rep, $vues;
 
-
-        if (isset($_POST['nbrAffichage'])) {
-
-            $nbrAffichage=$_POST['nbrAffichage'];
-
-            if (!$nbrAffichage = Validation::validString($nbrAffichage)) {
-                $Tmessage[] = 'Erreur : Nombre à afficher non valide';
-            }
-        }
-        else{
-            $nbrAffichage=5;
-        }
-
         $modele = new ModeleUtilisateur();
 
-        $nbrAffichage= (int) $nbrAffichage;
-
-        $data = $modele->getNews($nbrAffichage);
+        $data = $modele->getNews(0,99999999999999);
 
         require ($rep.$vues['vueAdmin']);
     }
@@ -154,7 +139,7 @@ class AdminControleur
 
         $modele = new ModeleUtilisateur();
 
-        $data = $modele->getNews(5);
+        $data = $modele->getNews(1,999999999999999);
 
         require ($rep.$vues['vuehome']);
 

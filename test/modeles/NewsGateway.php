@@ -14,7 +14,7 @@ class NewsGateway
     public function getNews($premiereEntree,$nbrAffichage){
 
         $query='SELECT * FROM news ORDER BY date DESC LIMIT :premiereEntree,:nbrAffichage';
-        $this->connection->executeQuery($query,array(':premiereEntree'=>array($nbrAffichage,PDO::PARAM_INT),':nbrAffichage'=>array($nbrAffichage,PDO::PARAM_INT)));
+        $this->connection->executeQuery($query,array(':premiereEntree'=>array($premiereEntree,PDO::PARAM_INT),':nbrAffichage'=>array($nbrAffichage,PDO::PARAM_INT)));
         $result=$this->connection->getResults();
 
         foreach($result as $row){

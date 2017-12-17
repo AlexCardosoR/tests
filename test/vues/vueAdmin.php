@@ -21,33 +21,19 @@
 <main>
     <div id="listeNews">
         <h2>News</h2>
+        <hr>
         <p>
             <?php
 
             if(!empty($data)) {
                 foreach ($data as $news) :
-                    echo $news->getTitre() . "          " . " | ";
-                    echo $news->getDescription() . " | ";
-                    echo $news->getLien() . " | ";
                     echo $news->getGuid() . " | ";
-                    echo $news->getDatesortie() . " | ";
-                    echo $news->getCategorie() . "<br />\n";
-
+                    echo $news->getTitre() . "<hr/>";
                 endforeach;
             }
             ?>
         </p>
 
-        <form method="post" action="?action=getNewsAdmin" >
-            <select name="nbrAffichage" size="0" >
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
-            <input type="submit" value="Ok"/>
-        </form>
 
     </div>
     <div id="insertion">

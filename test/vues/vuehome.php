@@ -64,7 +64,7 @@
             }
             ?>
         </div>
-
+        <div class="navigation">
             <?php
             $pageActuelle=$_POST['pageActuelle'];
             $nbrPages=$_POST['nbrPages'];
@@ -79,18 +79,14 @@
                 $suivant= $pageActuelle+1;
                 echo'<a class="pagination_suivant" href="index.php?page='.$suivant.'">suivant</a>';
             }
+            $_POST['pageActuelle']=$pageActuelle;
+            $_POST['nbrPages']=$nbrPages;
             ?>
+        </div>
 
-
-            <form class="nbrAff" method="post" action="?action=getNews" >
+           <?php echo '<form class="nbrAff" method="post" action="?page='.htmlspecialchars($_POST['pageActuelle']).'" >'; ?>
                 <p>Nombre à afficher :</p>
-                <select name="nbrAffichage" size="1" >
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
+                <?php echo '<input type="number" name="nbrAffichage" value="'.htmlspecialchars($_SESSION['nbrAffichage']).'" min="5" max="20" step="5"/>'; ?>
                 <input type="submit" value="Ok"/>
             </form>
 
