@@ -3,84 +3,177 @@
 
 class Controleur
 {
+
     function __construct()
     {
-        global $rep, $vues;
-
-
-
-        $dvueErreur = array();
-
-
+        global $rep, $vues,$Tmessage;
 
         try {
 
-            if(!isset($_REQUEST['action'])){
+            if(!isset($_REQUEST['action']) && !isset($_GET['page'])){
                 $this->getNews();
             }
 
+            if(!empty($_GET['page'])){
+                $this->initPage();
+            }
+
             if(!empty($_REQUEST['action'])) {
+
                 $action = $_REQUEST['action'];
 
+
                 switch ($action) {
+
+                    case NULL :
+                        $this->Reinit();
+                        break;
 
                     case 'connexion':
 
                         $this->connexion();
                         break;
 
-                    default:
-                        echo 'afaire erreur';
+                    case 'getNews' || 'deconnexion' :
+
+                        $this->getNews();
                         break;
 
+                    default:
+                        $Tmessage[] = "Erreur Action Inconnue";
+                        require($rep . $vues['vuehome']);
+                        break;
                 }
             }
         } catch (PDOException $e) {
             echo $e->getmessage();
-            $dVueEreur[] = "Erreur PDO inattendue!!! ";
-            require($rep . $vues['erreur']);
+            $Tmessage[] = "Erreur PDO inattendue! ";
+            require($rep . $vues['vuehome']);
         }
         catch (Exception $e2) {
             echo $e2->getmessage();
-            $dVueEreur[] = "Erreur inattendue!!! ";
-            require($rep . $vues['erreur']);
+            $Tmessager[] = "Erreur inattendue! ";
+            require($rep . $vues['vuehome']);
         }
     }
 
-    function Reinit()
+    private function Reinit()
     {
         global $rep, $vues;
-        require($rep . $vues['Pagedacceuil']);
+        require($rep . $vues['vuehome']);
+
+    }
+
+    private function initPage(){
+
+        if (isset($_POST['nbrAffichage'])) {
+
+            $nbrAffichage=$_POST['nbrAffichage'];
+
+            if (!$nbrAffichage = Validation::validString($nbrAffichage)) {
+                $Tmessage[] = 'Erreur : Nombre à afficher non valide';
+            }
+        }
+        else{
+            $nbrAffichage=5;
+        }
+
+        $modele=new ModeleUtilisateur();
+        $nbrInfo= $modele->getNbrInfo();
+
+        $nbrPages=ceil($nbrInfo/$nbrAffichage);
+        if(isset($_GET['page'])){
+            $pageActuelle=intval($_GET['page']);
+            if($pageActuelle>$nbrPages){
+                $pageActuelle=$nbrPages;
+            }
+            else{
+                $pageActuelle='1';
+            }
+            $premiereEntree=($pageActuelle-1)*$nbrAffichage;
+        }
+
+        $this->getNews($premiereEntree);
 
     }
 
 
-    function getNews()
+    protected function getNews($premiereEntree = null)
     {
-        global $rep, $vues;
+        global $rep, $vues,$Tmessage;
+
+        if(!isset($premiereEntree) || $premiereEntree==null){
+            $premiereEntree='1';
+            $pageAcuelle=1;
+            $nbrPages=1;
+        }
+
+        if (isset($_POST['nbrAffichage'])) {
+
+            $nbrAffichage=$_POST['nbrAffichage'];
+
+            if (!$nbrAffichage = Validation::validString($nbrAffichage)) {
+                $Tmessage[] = 'Erreur : Nombre à afficher non valide';
+            }
+        }
+        else{
+            $nbrAffichage=5;
+        }
 
         $modele = new ModeleUtilisateur();
 
-        $data = $modele->getNews();
+        $nbrAffichage= (int) $nbrAffichage;
+        $premiereEntree= (int) $premiereEntree;
 
+        $data = $modele->getNews($premiereEntree,$nbrAffichage);
+
+        $_POST['pageActuelle']=$pageAcuelle;
+        $_POST['nbrPages']=$nbrPages;
         require ($rep.$vues['vuehome']);
+    }
+
+    private function getNewsSansRedirection(){
+
+        $modele = new ModeleUtilisateur();
+
+        return $modele->getNews(5);
     }
 
     private function connexion()
     {
+        session_start();
+        global $rep,$vues,$Tmessage;
+        $username = $_POST['login'];
+        $passwd = $_POST['passwd'];
 
-        global $rep,$vues;
-        //vérif ici les $_POST
-        $modele = new ModeleUtilisateur();
+        if(count($_POST)>0){
 
-        $connexion = $modele->connexion();//les envoyer en param
+            if (!$url=Validation::validString($username)) {
+                $Tmessage[] = 'Erreur : Login Non valide';
+            }
 
-        if ($connexion) {
-            require($rep.$vues['vueAdmin']);
+            if (!$name=Validation::validString($passwd)) {
+                $Tmessage[] = 'Erreur : Password Non valide';
+            }
 
+            $modele = new ModeleUtilisateur();
+
+            $connexion = $modele->connexion($username,$passwd);
+
+
+            if ($connexion) {
+                $Tmessage[]="pas d'erreur";
+                $modele = new ModeleUtilisateur();
+                $data = $modele->getNews(5);
+
+                require($rep.$vues['vueAdmin']);
+            }
+            else{
+                $Tmessage[] = "login ou password invalide";
+                $data=$this->getNewsSansRedirection();
+                require($rep . $vues['vuehome']);
+            }
         }
-        else echo 'afaire';
-
     }
 }
 

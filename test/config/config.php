@@ -1,20 +1,19 @@
 <?php
 
-//gen
+
 $rep=__DIR__.'/../';
 
-// liste des modules à inclure
 
-//$dConfig['includes']= array('controleur/Validation.php');
-
+//Erreurs et messages
+$Tmessage=array();
 
 
 //BD
 
-
 $base="mysql:host=localhost;dbname=root";
 $login="root";
 $mdp="";
+
 
 //Vues
 

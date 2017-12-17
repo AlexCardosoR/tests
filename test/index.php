@@ -1,9 +1,4 @@
 <?php
-//si controller pas objet
-//  header('Location: controller/controller.php');
-
-//si controller objet
-
 
 //chargement config
 require_once(__DIR__.'/config/config.php');

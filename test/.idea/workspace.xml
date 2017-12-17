@@ -114,6 +114,24 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+=======
+      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/config.php">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="612">
+              <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+=======
+            <state relative-caret-position="204">
+              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+>>>>>>> a3c0b3da90674c8bd4b88f960102773b6f10222f
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+>>>>>>> bc5182b68600d0951dd8b598a8c4c46a1e3f2a3c
       <file leaf-file-name="Autoload.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/Autoload.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -176,8 +194,17 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 7" />
   <component name="ProjectFrameBounds">
+<<<<<<< HEAD
     <option name="x" value="420" />
     <option name="width" value="1507" />
+=======
+<<<<<<< HEAD
+    <option name="x" value="-7" />
+=======
+    <option name="x" value="953" />
+>>>>>>> a3c0b3da90674c8bd4b88f960102773b6f10222f
+    <option name="width" value="974" />
+>>>>>>> bc5182b68600d0951dd8b598a8c4c46a1e3f2a3c
     <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
@@ -319,18 +346,39 @@
       <workItem from="1513010488688" duration="2681000" />
       <workItem from="1513176252848" duration="6534000" />
       <workItem from="1513342751675" duration="3951000" />
+<<<<<<< HEAD
+      <workItem from="1513356201974" duration="3208000" />
+=======
       <workItem from="1513356201974" duration="3206000" />
       <workItem from="1513407939066" duration="5956000" />
+<<<<<<< HEAD
       <workItem from="1513422253722" duration="1201000" />
       <workItem from="1513528132446" duration="621000" />
+=======
+>>>>>>> a3c0b3da90674c8bd4b88f960102773b6f10222f
+>>>>>>> bc5182b68600d0951dd8b598a8c4c46a1e3f2a3c
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="36600000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="420" y="0" width="1507" height="1047" extended-state="0" />
+=======
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="28824000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
+=======
+    <option name="totallyTimeSpent" value="34778000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="953" y="0" width="974" height="1047" extended-state="0" />
+>>>>>>> a3c0b3da90674c8bd4b88f960102773b6f10222f
+>>>>>>> bc5182b68600d0951dd8b598a8c4c46a1e3f2a3c
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18309858" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -654,11 +702,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modeles/BookGateway.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="255">
           <caret line="15" column="44" lean-forward="true" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
           <folding>
             <marker date="1513411516561" expanded="true" signature="202:228" ph="SELECT * fro... news" />
           </folding>
+=======
+<<<<<<< HEAD
+        <state relative-caret-position="612">
+          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+=======
+        <state relative-caret-position="663">
+          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+>>>>>>> a3c0b3da90674c8bd4b88f960102773b6f10222f
+          <folding />
+>>>>>>> bc5182b68600d0951dd8b598a8c4c46a1e3f2a3c
         </state>
       </provider>
     </entry>
