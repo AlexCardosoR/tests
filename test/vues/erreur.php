@@ -6,6 +6,7 @@
 
 <html>
 <body>
+<div class="erreur">
 <h4>Messages :</h4>
 <?php
 if(isset($Tmessage) || !empty($Tmessage)) {
@@ -17,7 +18,7 @@ else {
     echo " pas d'erreur " ;
 }
 ?>
-
+</div>
 </body>
 </html>
 

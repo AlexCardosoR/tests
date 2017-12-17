@@ -1,86 +1,104 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
     <title>NEWS - RSS</title>
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width"/>
+    <style>
+        <?php
+
+        include('styles/vuehomestyle.css');
+
+        ?>
+    </style>
+
 </head>
 
 <body>
 
 <header>
+    <div class="arrierePlan">
+        <div class="entete">
+            <h1>NEWS - RSS</h1>
 
-    <h1>NEWS - RSS</h1>
+            <div id="formConnexion">
+                <h3>Connectez-vous :</h3>
+                <form method="post" action="?action=connexion">
+                    <fieldset id="Connexion">
 
-    <div id="formConnexion">
-        <h3>Connectez-vous</h3>
-        <form method="post" action="?action=connexion">
-            <fieldset>
-                <p>Login :</p>
-                <input  value="root" type="text" name="login" required />
-                <p>Password :</p>
-                <input value="root" type="password" name="passwd" required />
+                        <div>
+                            <div>
+                                <p>Login :</p>
+                                <input  value="root" type="text" name="login" required />
+                            </div>
+                            <div>
+                                <p>Password :</p>
+                                <input value="root" type="password" name="passwd" required />
+                            </div>
+                        </div>
 
-                <input type="submit" value="Se connecter"/>
-            </fieldset>
-        </form >
+                        <input type="submit" value="Se connecter"/>
+
+                    </fieldset>
+                </form >
+            </div>
+        </div>
     </div>
-
 </header>
 
 <main>
+    <div class="arrierePlan">
+
+        <h2>News</h2>
+        <div class="articles">
+            <?php
+            if(!empty($data)) {
+                foreach ($data as $news) :
+                    echo "<div class='article'>";
+                    echo '<a href="'.$news->getLien().'"><h3>'.$news->getTitre()."</h3></a>";
+                    echo "<p>".$news->getCategorie() . "</p>";
+                    echo "<p class='description'>".$news->getDescription()."</p>";
+                    echo "<p>".$news->getDatesortie()."</p>";
+                    echo "</div><hr>";
+                endforeach;
+            }
+            ?>
+        </div>
+
+            <?php
+            $pageActuelle=$_POST['pageActuelle'];
+            $nbrPages=$_POST['nbrPages'];
+            if($pageActuelle!=1){
+                $precedent=$pageActuelle-1;
+                echo'<a class="pagination_suivant" href="index.php?page='.$precedent.'">precedent</a>';
+            }
+            for($i=1; $i<=$nbrPages; $i++){
+                echo'<a class="pagination" href="index.php?page='.$i.'">'.$i.'</a>';
+            }
+            if($pageActuelle<$nbrPages){
+                $suivant= $pageActuelle+1;
+                echo'<a class="pagination_suivant" href="index.php?page='.$suivant.'">suivant</a>';
+            }
+            ?>
 
 
-    <h2>News</h2>
-    <p>
-        <?php
-        if(!empty($data)) {
-            foreach ($data as $news) :
-                echo $news->getTitre() . "          " . " | ";
-                echo $news->getDescription() . " | ";
-                echo $news->getLien() . " | ";
-                echo $news->getGuid() . " | ";
-                echo $news->getDatesortie() . " | ";
-                echo $news->getCategorie() . "<br />\n";
+            <form class="nbrAff" method="post" action="?action=getNews" >
+                <p>Nombre à afficher :</p>
+                <select name="nbrAffichage" size="1" >
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+                <input type="submit" value="Ok"/>
+            </form>
 
-            endforeach;
-        }
-        ?>
-    </p>
-
-    <form id="selecRange" method="post" action="?action=getNews" >
-        <input type="number" value="10" max="50" step="5" name="nbrAffichage" />
-        <input type="submit" value="Ok"/>
-    </form>
-
+    </div>
 </main>
-<?php require("erreur.php");?>
+<div class="arrierePlan">
+    <?php require("erreur.php");?>
+</div>
 </body>
-
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </html>

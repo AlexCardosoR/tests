@@ -116,6 +116,7 @@ class News
      * @param $datesortie
      * @param $categorie
      */
+
     public function __construct($titre, $description, $lien, $guid, $datesortie, $categorie)
     {
         $this->titre = $titre;

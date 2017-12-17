@@ -1,0 +1,138 @@
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        body {
+    font-family: 'Trebuchet MS', sans-serif;
+    background-image:url("http://www.lowerbucks.live/wp-content/uploads/2017/08/coffee-over-newspaper.jpg");
+    background-repeat:no-repeat;
+            background-attachment:  fixed;
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    margin: 1% 10% 1% 10%;
+}
+
+
+.arrierePlan{
+    background-color: rgba(0,0,0,0.7);
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px 0% 10px 0%;
+}
+
+/*----------entete-----------*/
+.entete{
+    padding: 1%;
+    display: flex;
+    align-items:center;
+}
+
+.entete h1{
+    flex:5;
+    margin: 1%;
+    text-align: center;
+}
+
+#formConnexion{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex: 4;
+}
+#formConnexion h3{
+    align-self: center;
+}
+                  
+#Connexion{
+    border-radius: 5px; 
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}    
+
+
+#Connexion div{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items:center;
+}
+
+#Connexion div div input{
+    margin-left: 5px;
+}
+
+#Connexion input{
+    align-self: center;
+    border: none;
+    border-radius: 3px;
+    background-color: whitesmoke;
+}        
+
+@media screen and (max-width: 990px) {
+    #formConnexion{
+        align-items:stretch; 
+    }
+}
+
+
+/*-----article------*/
+
+.arrierePlan h2{
+    text-align: center;
+}
+
+.article{
+    margin-left: 1%;
+    margin-right: 1%;
+    
+}
+
+.article a{
+    color: whitesmoke;
+    transition: 0.3s;
+}
+
+.article a:hover{
+    color: cornsilk;
+}
+
+.basArticle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nbrAff{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.basArticle input , .nbrAff input, select{
+    border: none;
+    border-radius: 3px;
+    margin: 5px;
+}
+
+/*-------footer-----*/
+
+.erreur{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 1%;
+}
+                                                

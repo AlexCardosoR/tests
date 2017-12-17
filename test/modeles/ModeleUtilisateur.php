@@ -11,11 +11,16 @@ class ModeleUtilisateur
         return $this->news->getPass($username,$passwd);
     }
 
+    function getNbrInfo(){
+        $g=new NewsGateway(new Connection());
+        $data=$g->getNbrInfo();
+        return $data;
+    }
 
-    function getNews($nbrAffichage) {
+    function getNews($premiereEntree,$nbrAffichage) {
 
         $g=new NewsGateway(new Connection());
-        $data=$g->getNews($nbrAffichage);
+        $data=$g->getNews($premiereEntree,$nbrAffichage);
         return $data;
     }
 

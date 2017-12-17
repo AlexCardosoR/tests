@@ -3,15 +3,12 @@
 
 class Frontcontroleur
 {
-    private $actionAdmin= array('deconnexion','addNews','deleteNews');
-    private $actionUser=array('connexion','getNews');
+    private $actionAdmin= array('deconnexion','addNews','deleteNews','getNewsAdmin');
+    private $actionUser=array('connexion','getNews','precedent','suivant');
 
     function __construct()
     {
         global $rep, $vues,$Tmessage;
-
-
-        session_start();
 
         try {
             if(!isset($_REQUEST['action'])){
@@ -29,13 +26,13 @@ class Frontcontroleur
                 }
                 else{
                     $Tmessage[] = "Action inconnue";
-                    require($rep . $vues['erreur']);
+                    require($rep . $vues['vuehome']);
                 }
             }
         }catch (PDOException $e) {
 
             $dVueEreur[] = "Erreur inattendue!!! ";
-            require($rep . $vues['erreur']);
+            require($rep . $vues['vuehome']);
 
         }
     }

@@ -20,40 +20,70 @@ class AdminControleur
                     $this->Reinit();
                     break;
 
-                case "deconnexion";
+                case "getNewsAdmin":
+                    $this->getNewsAdmin();
+                    break;
+
+                case "deconnexion":
                     $this->deconnexion();
                     break;
-                case "addNews";
+
+                case "addNews":
                     $this->addNews();
                     break;
-                case "deleteNews";
+
+                case "deleteNews":
                     $this->deleteNews();
                     break;
+
                 default:
                     $Tmessage[] = "Erreur PHP";
-                    require($rep . $vues['erreur']);
+                    require($rep . $vues['vuehome']);
                     break;
             }
         } catch (PDOException $e) {
             $dVueEreur[] = "Erreur inattendue! ";
-            require($rep . $vues['erreur']);
+            require($rep . $vues['vuehome']);
 
         } catch (Exception $e2) {
             $dVueEreur[] = "Erreur inattendue! ";
-            require($rep . $vues['erreur']);
+            require($rep . $vues['vuehome']);
         }
     }
 
+    function getNewsAdmin(){
+        global $rep, $vues;
+
+
+        if (isset($_POST['nbrAffichage'])) {
+
+            $nbrAffichage=$_POST['nbrAffichage'];
+
+            if (!$nbrAffichage = Validation::validString($nbrAffichage)) {
+                $Tmessage[] = 'Erreur : Nombre à afficher non valide';
+            }
+        }
+        else{
+            $nbrAffichage=5;
+        }
+
+        $modele = new ModeleUtilisateur();
+
+        $nbrAffichage= (int) $nbrAffichage;
+
+        $data = $modele->getNews($nbrAffichage);
+
+        require ($rep.$vues['vueAdmin']);
+    }
 
     function Reinit()
     {
         global $rep, $vues;
-
         require($rep.$vues['vueAdmin']);
     }
 
     function deleteNews(){
-        global $rep, $vues,$Tmessage;
+        global $Tmessage;
         $guid=$_POST['guid'];
         if (isset($guid)){
             if (!$guid=Validation::validInt($guid)) {
@@ -70,14 +100,14 @@ class AdminControleur
                 $Tmessage[]='Erreur : guid non existant dans la base de donnée';
             }
 
+            $this->getNewsAdmin();
 
-            require ($rep.$vues['vueAdmin']);
         }
     }
 
     function addNews()
     {
-        global $rep, $vues,$Tmessage;
+        global $Tmessage;
         $titre=$_POST['titre'];
         $description=$_POST['description'];
         $lien=$_POST['lien'];
@@ -110,7 +140,7 @@ class AdminControleur
                 $Tmessage[]="News ajoutée !!";
             }
 
-            require ($rep.$vues['vueAdmin']);
+            $this->getNewsAdmin();
         }
     }
 
@@ -121,6 +151,12 @@ class AdminControleur
         $modele = new ModeleAdmin();
 
         $deconnexion= $modele->deconnexion();
+
+        $modele = new ModeleUtilisateur();
+
+        $data = $modele->getNews(5);
+
+        require ($rep.$vues['vuehome']);
 
     }
 

@@ -3,9 +3,6 @@
 
 $rep=__DIR__.'/../';
 
-// liste des modules à inclure
-
-//$dConfig['includes']= array('controleur/Validation.php');
 
 //Erreurs et messages
 $Tmessage=array();

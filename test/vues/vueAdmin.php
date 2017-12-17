@@ -1,9 +1,14 @@
 <html>
 <head>
+
     <meta charset="utf-8">
-
-    <title>NEWS - RSS</title>
-
+    <title>NEWS - RSS - ADMIN</title>
+    <meta name="viewport" content="width=device-width">
+    <style>
+        <?php
+        include('styles/vueAdminstyle.css');
+        ?>
+    </style>
 </head>
 <body>
 
@@ -19,8 +24,6 @@
         <p>
             <?php
 
-            $modele = new ModeleUtilisateur();
-            $data = $modele->getNews(15);
             if(!empty($data)) {
                 foreach ($data as $news) :
                     echo $news->getTitre() . "          " . " | ";
@@ -34,6 +37,18 @@
             }
             ?>
         </p>
+
+        <form method="post" action="?action=getNewsAdmin" >
+            <select name="nbrAffichage" size="0" >
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+            <input type="submit" value="Ok"/>
+        </form>
+
     </div>
     <div id="insertion">
         <p>Insertion News</p>
@@ -42,12 +57,12 @@
                 <p>Titre:</p>
                 <input  value="test" placeholder="Titre" type="text" name="titre" required />
                 <p>Description:</p>
-                <textarea value="test" name="description" placeholder="Description" required >
+                <textarea value="test" name="description" required >
                 </textarea>
                 <p>Lien:</p>
                 <input value="http://test.com" placeholder="Lien" type="url" name="lien" required />
                 <p>Date:</p>
-                <input type="date" name="datesortie" required />
+                <input type="date"  name="datesortie" required />
                 <p>Categorie:</p>
                 <input value="test" placeholder="Categorie" type="text" name="categorie" required />
                 <input value="Insérer" type="submit">
@@ -66,6 +81,9 @@
         </form>
     </div>
 
+    <form method="post" action="?action=deconnexion">
+    <input type="submit" value="Déconnexion">
+    </form>
     <?php require("erreur.php");?>
 
 </main>

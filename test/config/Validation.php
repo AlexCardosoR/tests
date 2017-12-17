@@ -20,14 +20,14 @@ class Validation
         return false;
     }
 
-/*
+
     public static function validInt($number ) {
         if (!empty($number)) {
             return filter_var($number, FILTER_VALIDATE_INT);
         }
         return false;
     }
-*/
+
 
 
 }
